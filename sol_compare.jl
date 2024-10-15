@@ -113,7 +113,7 @@ function sim_time(b_val, lambda_val, g_val, t_sim_end)
     end
 
     cb = ContinuousCallback(condition, affect!)
-    sol = solve(ensamble_prob, EM(), dt=0.003 ,trajectories=100, callback=cb, EnsembleThreads(), adaptive=false)
+    sol = solve(ensamble_prob, EM(), dt=0.001 ,trajectories=300, callback=cb, EnsembleThreads(), adaptive=false)
     successful_trajs = [traj for traj in sol if Symbol(traj.retcode) == :Success || Symbol(traj.retcode) == :Terminated]
     min_len = minimum([length(traj.t) for traj in successful_trajs])
     mean_amps = []
@@ -130,9 +130,8 @@ function sim_time(b_val, lambda_val, g_val, t_sim_end)
     end
     mean_amps ./= length(successful_trajs)
     mean_ts ./= length(successful_trajs)
-    cut_idx = findfirst(x -> x<0.0, mean_amps)
     decay_model(x, p) = p[1] .* exp.(-p[2] .* x)
-    fit = curve_fit(decay_model, mean_ts[1:cut_idx], mean_amps[1:cut_idx], [1.0, 1.0])
+    fit = curve_fit(decay_model, mean_ts, mean_amps, [1.0, 1.0])
     fit_time = 1 / coef(fit)[2]
     end_time = 1.0#sum(end_times) / length(end_times)
     println("g: $g_val, lambda: $lambda_val, b: $b_val")

@@ -45,7 +45,7 @@ end
 
 function find_b_vals(lambda_val, g_val)
     left = BigFloat(0.0)
-    right = BigFloat(4.0*10^10)
+    right = BigFloat(4.0 * 10^10)
     possible_b_vals = []
     while right - left > BigFloat(1e-9)
         mid = (left + right) / 2
@@ -104,29 +104,23 @@ function sim_time(b_val, lambda_val, g_val, t_sim_end)
     sol = solve(problem)
     ensamble_prob = EnsembleProblem(problem)
 
-    function condition(alpha, t, integrator)
-        return real(alpha[1] + conj(alpha[2]))/2 > 0.0
-    end
+    # function condition(alpha, t, integrator)
+    #     return real(alpha[1] + conj(alpha[2]))/2 > 0.0
+    # end
 
-    function affect!(integrator)
-        terminate!(integrator)
-    end
+    # function affect!(integrator)
+    #     terminate!(integrator)
+    # end
 
-    cb = ContinuousCallback(condition, affect!)
-    sol = solve(ensamble_prob, EM(), dt=0.001 ,trajectories=300, callback=cb, EnsembleThreads(), adaptive=false)
+    # cb = ContinuousCallback(condition, affect!)
+    sol = solve(ensamble_prob, EM(), dt=0.003, trajectories=100, EnsembleThreads(), adaptive=false)
     successful_trajs = [traj for traj in sol if Symbol(traj.retcode) == :Success || Symbol(traj.retcode) == :Terminated]
-    min_len = minimum([length(traj.t) for traj in successful_trajs])
-    mean_amps = []
-    mean_ts = []
+    mean_amps = zeros(length(successful_trajs[1].t))
+    mean_ts = zeros(length(successful_trajs[1].t))
     for traj in successful_trajs
-        amps = map(x -> -real(x[1]+conj(x[2])), traj.u)
-        if length(mean_amps) == 0
-            mean_amps = amps[1:min_len]
-            mean_ts = traj.t[1:min_len]
-        else
-            mean_amps = mean_amps .+ amps[1:min_len]
-            mean_ts = mean_ts .+ traj.t[1:min_len]
-        end
+        amps = map(x -> -real(x[1] + conj(x[2])), traj.u)
+        mean_amps .+= amps
+        mean_ts .+= traj.t
     end
     mean_amps ./= length(successful_trajs)
     mean_ts ./= length(successful_trajs)

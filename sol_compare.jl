@@ -113,7 +113,7 @@ function sim_time(b_val, lambda_val, g_val, t_sim_end)
     # end
 
     # cb = ContinuousCallback(condition, affect!)
-    sol = solve(ensamble_prob, EM(), dt=0.003, trajectories=100, EnsembleThreads(), adaptive=false)
+    sol = solve(ensamble_prob, EM(), dt=0.003, trajectories=1000, EnsembleThreads(), adaptive=false)
     successful_trajs = [traj for traj in sol if Symbol(traj.retcode) == :Success || Symbol(traj.retcode) == :Terminated]
     mean_amps = zeros(length(successful_trajs[1].t))
     mean_ts = zeros(length(successful_trajs[1].t))

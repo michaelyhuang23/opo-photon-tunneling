@@ -112,9 +112,10 @@ function find_b_vals(lambda_val, g_val)
 end
 
 cases = []
-lambda_val = 2.0
-g_val = 0.1
-for b_val in range(3.1, 3.84, 20)
+#lambda_val = 2.0
+b_val = 1
+g_val = 0.4
+for lambda_val in range(2.1, 3, 20)
     try
         time1 = sol1_time(b_val, lambda_val, g_val)
         time3 = sol3_time(b_val, lambda_val, g_val)
@@ -192,6 +193,6 @@ for case in cases
 end
 
 println("number of successes: ", size(success_cases))
-open("output.json", "w") do file
+open("output4.json", "w") do file
     JSON.print(file, success_cases)
 end

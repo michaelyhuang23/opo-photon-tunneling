@@ -113,8 +113,8 @@ end
 
 cases = []
 lambda_val = 2.0
-g_val = 0.4
-for b_val in range(0, 2, 20)
+g_val = 0.1
+for b_val in range(3.1, 3.84, 20)
     try
         time1 = sol1_time(b_val, lambda_val, g_val)
         time3 = sol3_time(b_val, lambda_val, g_val)
@@ -157,7 +157,7 @@ function sim_time(b_val, lambda_val, g_val, t_sim_end)
     # end
 
     # cb = ContinuousCallback(condition, affect!)
-    sol = solve(ensamble_prob, EM(), dt=0.003, trajectories=300, EnsembleThreads(), adaptive=false)
+    sol = solve(ensamble_prob, EM(), dt=0.005, trajectories=100, EnsembleThreads(), adaptive=false)
     successful_trajs = [traj for traj in sol if Symbol(traj.retcode) == :Success || Symbol(traj.retcode) == :Terminated]
     mean_amps = zeros(length(successful_trajs[1].t))
     mean_ts = zeros(length(successful_trajs[1].t))

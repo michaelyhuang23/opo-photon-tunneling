@@ -5,14 +5,14 @@ using JSON
 using LsqFit
 
 
-function calc_time(b_val, lambda_val, g_val)
+function sol1_time(b_val, lambda_val, g_val)
     function parametrize(alpha, beta)
         u = asin(g_val * alpha / sqrt(lambda_val)) + asin(g_val * beta / sqrt(lambda_val))
         v = asin(g_val * alpha / sqrt(lambda_val)) - asin(g_val * beta / sqrt(lambda_val))
         return [u, v]
     end
 
-    function sol1_time()
+    function analytic_time()
         function V(u, v)
             term1 = lambda_val * (cos(u) - cos(v)) - 2 * log(cos(u) + cos(v))
             term2 = 2 * g_val * b_val / sqrt(lambda_val) * log(cos(u) + cos(v))
@@ -40,7 +40,50 @@ function calc_time(b_val, lambda_val, g_val)
 
         return (term1 + term2) * term3 / (term4 * term5 + 1)
     end
-    return sol1_time()
+    return analytic_time()
+end
+
+function sol3_time(b_val, lambda_val, g_val)
+    # Define the sigma function
+    sigma(l, b, g) = b * g / sqrt(l)
+
+    # Define the V function
+    V(l, b, g, x) = l * cos(x) - l + 2 * (sigma(l, b, g) - 1) * log(1 + cos(x)) - 
+                    2 * sigma(l, b, g) * log(3 - cos(x) + 4 * sin(x / 2))
+
+    # Define the remaining functions
+    PvvV0(l, b, g) = l + 1
+    PuuV0(l, b, g) = 1 - l
+    PuV0(l, b, g) = -2 * sigma(l, b, g)
+    PvvV1(l, b, g) = l + sqrt(2) * sigma(l, b, g) + 2
+    PuuV1(l, b, g) = 1 / cos(π / 5)^2 + sigma(l, b, g) * tan(π / 5) / cos(π / 5) - 
+                    l * cos(2 * π / 5)
+    PuV1(l, b, g) = -2 * tan(π / 5) - 2 * sigma(l, b, g) / cos(π / 5) + 
+                    l * sin(2 * π / 5)
+
+    V0(l, b, g) = -2 * log(2)
+    V1(l, b, g) = V(l, b, g, -2 * π / 5)
+
+    apex0(l, b, g) = -PuV0(l, b, g) / PuuV0(l, b, g)
+    Vapex0(l, b, g) = V0(l, b, g) - PuV0(l, b, g)^2 / (2 * PuuV0(l, b, g))
+    apex1(l, b, g) = -PuV1(l, b, g) / PuuV1(l, b, g) - 2 * π / 5
+    Vapex1(l, b, g) = V1(l, b, g) - PuV1(l, b, g)^2 / (2 * PuuV1(l, b, g))
+
+    k(l, b, g) = (Vapex0(l, b, g) - Vapex1(l, b, g)) / (apex0(l, b, g) - apex1(l, b, g))
+
+    function analytic_time(l, b, g)
+        term1factor = g / k(l, b, g) * sqrt(PvvV0(l, b, g) / PvvV1(l, b, g)) * 
+                      (exp((Vapex0(l, b, g) - Vapex1(l, b, g)) / g^2) - 1)
+        term1inner = sqrt(π / (2 * PuuV1(l, b, g))) + 
+                     sqrt(-π / (2 * PuuV0(l, b, g))) + 
+                     g / k(l, b, g)
+        term2factor = sqrt(PvvV0(l, b, g) / PvvV1(l, b, g))
+        term2inner = π / (2 * sqrt(-PuuV0(l, b, g) * PuuV1(l, b, g))) - 
+                     1 / k(l, b, g) * (apex0(l, b, g) - apex1(l, b, g))
+        return term1factor * term1inner + term2factor * term2inner
+    end   
+
+    return analytic_time(lambda_val, b_val, g_val)
 end
 
 function find_b_vals(lambda_val, g_val)
@@ -50,10 +93,11 @@ function find_b_vals(lambda_val, g_val)
     while right - left > BigFloat(1e-9)
         mid = (left + right) / 2
         try
-            time = calc_time(Float64(mid), lambda_val, g_val)
-            if time < 400
+            time1 = sol1_time(Float64(mid), lambda_val, g_val)
+            time3 = sol3_time(Float64(mid), lambda_val, g_val)
+            if time1 < 400 || time3 < 400
                 right = mid
-                push!(possible_b_vals, (Float64(mid), time))
+                push!(possible_b_vals, (Float64(mid), time1, time3))
             else
                 left = mid
             end
@@ -70,15 +114,15 @@ end
 cases = []
 lambda_val = 2.0
 b_val = 0.0
-for g_val in range(0.4, 1.0, 20)
+for g_val in range(0.1, 0.5, 20)
     try
-        time = calc_time(b_val, lambda_val, g_val)
-        if time < 400
-            push!(cases, Dict("g" => g_val, "lambda" => lambda_val, "b" => b_val, "analytic_time" => time))
-            println("possible params: g: $g_val, lambda: $lambda_val, b: $b_val, time: $time")
+        time1 = sol1_time(b_val, lambda_val, g_val)
+        time3 = sol3_time(b_val, lambda_val, g_val)
+        if time1 < 400 || time3 < 400
+            push!(cases, Dict("g" => g_val, "lambda" => lambda_val, "b" => b_val, "sol1_time" => time1, "sol3_time" => time3))
+            println("possible params: g: $g_val, lambda: $lambda_val, b: $b_val, time1: $time1, time3: $time3")
         end
     catch e
-        right = mid
     end
 end
 
@@ -113,7 +157,7 @@ function sim_time(b_val, lambda_val, g_val, t_sim_end)
     # end
 
     # cb = ContinuousCallback(condition, affect!)
-    sol = solve(ensamble_prob, EM(), dt=0.01, trajectories=200, EnsembleThreads(), adaptive=false)
+    sol = solve(ensamble_prob, EM(), dt=0.003, trajectories=100, EnsembleThreads(), adaptive=false)
     successful_trajs = [traj for traj in sol if Symbol(traj.retcode) == :Success || Symbol(traj.retcode) == :Terminated]
     mean_amps = zeros(length(successful_trajs[1].t))
     mean_ts = zeros(length(successful_trajs[1].t))
@@ -137,7 +181,8 @@ end
 success_cases = []
 for case in cases
     try
-        end_time, fit_time = sim_time(case["b"], case["lambda"], case["g"], case["analytic_time"] * 4)
+        max_time = max(case["sol1_time"], case["sol3_time"]) * 4
+        end_time, fit_time = sim_time(case["b"], case["lambda"], case["g"], max_time)
         case["sim_end_time"] = end_time
         case["sim_fit_time"] = fit_time
         push!(success_cases, case)

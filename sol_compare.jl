@@ -113,8 +113,8 @@ end
 
 cases = []
 lambda_val = 2.0
-b_val = 0.0
-for g_val in range(0.1, 0.5, 20)
+g_val = 0.4
+for b_val in range(0, 2, 20)
     try
         time1 = sol1_time(b_val, lambda_val, g_val)
         time3 = sol3_time(b_val, lambda_val, g_val)

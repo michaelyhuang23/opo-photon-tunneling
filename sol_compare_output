@@ -1,1 +1,31 @@
 /var/spool/slurmd/job27439800/slurm_script: line 7: module: command not found
+┌ Warning: dt(2.2737367544323206e-13) <= dtmin(2.2737367544323206e-13) at t=435.49625879547756, and step error estimate = 8.011421597598156. Aborting. There is either an error in your model specification or the true solution is unstable.
+└ @ SciMLBase ~/.julia/packages/SciMLBase/Dwomw/src/integrator_interface.jl:619
+possible params: g: 0.15, lambda: 2.0, b: 1.7435897435897436, time1: 751.4451207954297, time3: 393.0057058522162
+possible params: g: 0.15, lambda: 2.0, b: 1.8461538461538463, time1: 336.6551821369898, time3: 190.96863734373252
+possible params: g: 0.15, lambda: 2.0, b: 1.9487179487179487, time1: 162.3614000522677, time3: 100.21834465168621
+possible params: g: 0.15, lambda: 2.0, b: 2.051282051282051, time1: 84.98460182578185, time3: 56.7360479698864
+possible params: g: 0.15, lambda: 2.0, b: 2.1538461538461537, time1: 48.86657382088019, time3: 34.51757821223902
+possible params: g: 0.15, lambda: 2.0, b: 2.2564102564102564, time1: 31.485273181889717, time3: 22.425039786707302
+possible params: g: 0.15, lambda: 2.0, b: 2.358974358974359, time1: 23.623150561572373, time3: 15.432072596110444
+possible params: g: 0.15, lambda: 2.0, b: 2.4615384615384617, time1: 22.916783501922993, time3: 11.151089291918039
+possible params: g: 0.15, lambda: 2.0, b: 2.5641025641025643, time1: 140.90708229679947, time3: 8.38987935389771
+g: 0.15, lambda: 2.0, b: 1.7435897435897436
+success count: 100, end times: 1.0, fit time: 500.7646486057955
+g: 0.15, lambda: 2.0, b: 1.8461538461538463
+success count: 100, end times: 1.0, fit time: 197.88956718782094
+g: 0.15, lambda: 2.0, b: 1.9487179487179487
+success count: 100, end times: 1.0, fit time: 115.08352680305218
+g: 0.15, lambda: 2.0, b: 2.051282051282051
+success count: 100, end times: 1.0, fit time: 41.83277990891996
+g: 0.15, lambda: 2.0, b: 2.1538461538461537
+success count: 100, end times: 1.0, fit time: 26.89754157104347
+g: 0.15, lambda: 2.0, b: 2.2564102564102564
+success count: 100, end times: 1.0, fit time: 20.439347561794843
+g: 0.15, lambda: 2.0, b: 2.358974358974359
+success count: 100, end times: 1.0, fit time: 12.598128656652307
+g: 0.15, lambda: 2.0, b: 2.4615384615384617
+success count: 100, end times: 1.0, fit time: 8.154238065534837
+g: 0.15, lambda: 2.0, b: 2.5641025641025643
+success count: 100, end times: 1.0, fit time: 6.203568825605572
+number of successes: (9,)

@@ -113,7 +113,7 @@ end
 
 cases = []
 lambda_val = 2.0
-g_val = 0.2
+g_val = 0.3
 for b_val in range(0, 4, 20)
     try
         time1 = sol1_time(b_val, lambda_val, g_val)
@@ -192,6 +192,6 @@ for case in cases
 end
 
 println("number of successes: ", size(success_cases))
-open("g2-1l2brange.json", "w") do file
+open("g3-1l2brange.json", "w") do file
     JSON.print(file, success_cases)
 end

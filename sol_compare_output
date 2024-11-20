@@ -1,61 +1,103 @@
-/var/spool/slurmd/job27426122/slurm_script: line 7: module: command not found
-┌ Warning: dt(1.1368683772161603e-13) <= dtmin(1.1368683772161603e-13) at t=346.03656083319817, and step error estimate = 7.933945599088845. Aborting. There is either an error in your model specification or the true solution is unstable.
+/var/spool/slurmd/job27427423/slurm_script: line 7: module: command not found
+┌ Warning: dt(1.4210854715202004e-14) <= dtmin(1.4210854715202004e-14) at t=46.187981868065044, and step error estimate = 11.96943291244615. Aborting. There is either an error in your model specification or the true solution is unstable.
 └ @ SciMLBase ~/.julia/packages/SciMLBase/Dwomw/src/integrator_interface.jl:619
-┌ Warning: dt(5.684341886080802e-14) <= dtmin(5.684341886080802e-14) at t=106.189915445481, and step error estimate = 5.369269636194942. Aborting. There is either an error in your model specification or the true solution is unstable.
+┌ Warning: dt(7.105427357601002e-15) <= dtmin(7.105427357601002e-15) at t=41.32190879110691, and step error estimate = 5.71271040770296. Aborting. There is either an error in your model specification or the true solution is unstable.
 └ @ SciMLBase ~/.julia/packages/SciMLBase/Dwomw/src/integrator_interface.jl:619
-┌ Warning: dt(2.842170943040401e-14) <= dtmin(2.842170943040401e-14) at t=94.30366829702251, and step error estimate = 21.730024648604847. Aborting. There is either an error in your model specification or the true solution is unstable.
+┌ Warning: dt(1.4210854715202004e-14) <= dtmin(1.4210854715202004e-14) at t=48.20553459094361, and step error estimate = 2.3779737802948326. Aborting. There is either an error in your model specification or the true solution is unstable.
 └ @ SciMLBase ~/.julia/packages/SciMLBase/Dwomw/src/integrator_interface.jl:619
-┌ Warning: dt(1.4210854715202004e-14) <= dtmin(1.4210854715202004e-14) at t=47.090356129997495, and step error estimate = 3.6398951214313633. Aborting. There is either an error in your model specification or the true solution is unstable.
+possible params: g: 0.6, lambda: 2.0, b: 0.0, time1: 21.16185620892232, time3: 26.887214058008322
+possible params: g: 0.6, lambda: 2.0, b: 0.21052631578947367, time1: 11.326515127119503, time3: 11.902903688625178
+possible params: g: 0.6, lambda: 2.0, b: 0.42105263157894735, time1: 8.658333072730125, time3: 6.036486850737945
+possible params: g: 0.6, lambda: 2.0, b: 0.631578947368421, time1: 30.46054297583841, time3: 3.2612562864352634
+g: 0.6, lambda: 2.0, b: 0.0
+success count: 100, end times: 1.0, fit time: 35.61082708082526
+g: 0.6, lambda: 2.0, b: 0.21052631578947367
+success count: 100, end times: 1.0, fit time: 8.259727467873192
+g: 0.6, lambda: 2.0, b: 0.42105263157894735
+success count: 100, end times: 1.0, fit time: 4.603359556081708
+g: 0.6, lambda: 2.0, b: 0.631578947368421
+success count: 100, end times: 1.0, fit time: 2.712222238141325
+number of successes: (4,)
+┌ Warning: dt(2.842170943040401e-14) <= dtmin(2.842170943040401e-14) at t=3.642383522047838, and step error estimate = 7.424844606439583. Aborting. There is either an error in your model specification or the true solution is unstable.
 └ @ SciMLBase ~/.julia/packages/SciMLBase/Dwomw/src/integrator_interface.jl:619
-┌ Warning: dt(1.4210854715202004e-14) <= dtmin(1.4210854715202004e-14) at t=45.630125531317915, and step error estimate = 13.868947108842745. Aborting. There is either an error in your model specification or the true solution is unstable.
+┌ Warning: dt(1.4210854715202004e-14) <= dtmin(1.4210854715202004e-14) at t=67.1755629682778, and step error estimate = 12.038129039709155. Aborting. There is either an error in your model specification or the true solution is unstable.
 └ @ SciMLBase ~/.julia/packages/SciMLBase/Dwomw/src/integrator_interface.jl:619
-┌ Warning: dt(7.105427357601002e-15) <= dtmin(7.105427357601002e-15) at t=25.27280638259554, and step error estimate = 43.55347951949227. Aborting. There is either an error in your model specification or the true solution is unstable.
+possible params: g: 0.5, lambda: 2.0, b: 0.0, time1: 44.8034432812502, time3: 53.552124988462836
+possible params: g: 0.5, lambda: 2.0, b: 0.21052631578947367, time1: 19.44449950417059, time3: 21.13103114783183
+possible params: g: 0.5, lambda: 2.0, b: 0.42105263157894735, time1: 11.205673525201282, time3: 9.997629923652417
+possible params: g: 0.5, lambda: 2.0, b: 0.631578947368421, time1: 10.336613086345222, time3: 5.2895448852354345
+g: 0.5, lambda: 2.0, b: 0.0
+success count: 100, end times: 1.0, fit time: 193.9183084778513
+g: 0.5, lambda: 2.0, b: 0.21052631578947367
+success count: 100, end times: 1.0, fit time: 14.644515797853423
+g: 0.5, lambda: 2.0, b: 0.42105263157894735
+success count: 100, end times: 1.0, fit time: 7.634225224577621
+g: 0.5, lambda: 2.0, b: 0.631578947368421
+success count: 100, end times: 1.0, fit time: 4.019214801563833
+number of successes: (4,)
+┌ Warning: dt(1.1368683772161603e-13) <= dtmin(1.1368683772161603e-13) at t=25.595339899157445, and step error estimate = 1.9972172651883673. Aborting. There is either an error in your model specification or the true solution is unstable.
 └ @ SciMLBase ~/.julia/packages/SciMLBase/Dwomw/src/integrator_interface.jl:619
-┌ Warning: dt(7.105427357601002e-15) <= dtmin(7.105427357601002e-15) at t=30.26347158148646, and step error estimate = 39.91708333307716. Aborting. There is either an error in your model specification or the true solution is unstable.
+┌ Warning: dt(2.842170943040401e-14) <= dtmin(2.842170943040401e-14) at t=172.17316761204242, and step error estimate = 3.6883804969614657. Aborting. There is either an error in your model specification or the true solution is unstable.
 └ @ SciMLBase ~/.julia/packages/SciMLBase/Dwomw/src/integrator_interface.jl:619
-┌ Warning: dt(7.105427357601002e-15) <= dtmin(7.105427357601002e-15) at t=8.53742627368219, and step error estimate = 5.080448779803356. Aborting. There is either an error in your model specification or the true solution is unstable.
+┌ Warning: dt(1.4210854715202004e-14) <= dtmin(1.4210854715202004e-14) at t=47.53301637495373, and step error estimate = 0.5374135704063188. Aborting. There is either an error in your model specification or the true solution is unstable.
 └ @ SciMLBase ~/.julia/packages/SciMLBase/Dwomw/src/integrator_interface.jl:619
-┌ Warning: dt(3.552713678800501e-15) <= dtmin(3.552713678800501e-15) at t=2.129805771987307, and step error estimate = 3.39456294530779. Aborting. There is either an error in your model specification or the true solution is unstable.
+┌ Warning: dt(7.105427357601002e-15) <= dtmin(7.105427357601002e-15) at t=46.827152225898715, and step error estimate = 4.743999331067448. Aborting. There is either an error in your model specification or the true solution is unstable.
 └ @ SciMLBase ~/.julia/packages/SciMLBase/Dwomw/src/integrator_interface.jl:619
-┌ Warning: dt(3.552713678800501e-15) <= dtmin(3.552713678800501e-15) at t=2.2372880868442775, and step error estimate = 0.5232618086216081. Aborting. There is either an error in your model specification or the true solution is unstable.
+┌ Warning: dt(7.105427357601002e-15) <= dtmin(7.105427357601002e-15) at t=21.11680718108707, and step error estimate = 0.017167302559029946. Aborting. There is either an error in your model specification or the true solution is unstable.
 └ @ SciMLBase ~/.julia/packages/SciMLBase/Dwomw/src/integrator_interface.jl:619
-possible params: g: 0.3684210526315789, lambda: 2.0, b: 0.1, time1: 190.2336748825925, time3: 183.72234865771603
-possible params: g: 0.42105263157894735, lambda: 2.0, b: 0.1, time1: 72.16252444676284, time3: 76.3261241340291
-possible params: g: 0.47368421052631576, lambda: 2.0, b: 0.1, time1: 37.49217529250683, time3: 42.142679280003115
-possible params: g: 0.5263157894736842, lambda: 2.0, b: 0.1, time1: 23.646202363348895, time3: 27.491590164208887
-possible params: g: 0.5789473684210527, lambda: 2.0, b: 0.1, time1: 16.912491323308764, time3: 19.905656496642752
-possible params: g: 0.631578947368421, lambda: 2.0, b: 0.1, time1: 13.170236880245241, time3: 15.442755785808362
-possible params: g: 0.6842105263157895, lambda: 2.0, b: 0.1, time1: 10.88494536551552, time3: 12.5681611258258
-possible params: g: 0.7368421052631579, lambda: 2.0, b: 0.1, time1: 9.39007504411428, time3: 10.588623415794338
-possible params: g: 0.7894736842105263, lambda: 2.0, b: 0.1, time1: 8.36070714104516, time3: 9.15427041682686
-possible params: g: 0.8421052631578947, lambda: 2.0, b: 0.1, time1: 7.623682061672608, time3: 8.072760260172084
-possible params: g: 0.8947368421052632, lambda: 2.0, b: 0.1, time1: 7.079957241695239, time3: 7.230942965275387
-possible params: g: 0.9473684210526315, lambda: 2.0, b: 0.1, time1: 6.669548050382087, time3: 6.5585044893004305
-possible params: g: 1.0, lambda: 2.0, b: 0.1, time1: 6.354374742264057, time3: 6.009730897866463
-g: 0.3684210526315789, lambda: 2.0, b: 0.1
-success count: 100, end times: 1.0, fit time: 223.64192309617073
-g: 0.42105263157894735, lambda: 2.0, b: 0.1
-success count: 100, end times: 1.0, fit time: 78.54814241970126
-g: 0.47368421052631576, lambda: 2.0, b: 0.1
-success count: 100, end times: 1.0, fit time: 40.560038502410855
-g: 0.5263157894736842, lambda: 2.0, b: 0.1
-success count: 100, end times: 1.0, fit time: 29.395716309517983
-g: 0.5789473684210527, lambda: 2.0, b: 0.1
-success count: 100, end times: 1.0, fit time: 22.856998531871582
-g: 0.631578947368421, lambda: 2.0, b: 0.1
-success count: 100, end times: 1.0, fit time: 18.69954053826342
-g: 0.6842105263157895, lambda: 2.0, b: 0.1
-success count: 100, end times: 1.0, fit time: 12.055554858889918
-g: 0.7368421052631579, lambda: 2.0, b: 0.1
-success count: 100, end times: 1.0, fit time: 10.257795536037424
-g: 0.7894736842105263, lambda: 2.0, b: 0.1
-success count: 100, end times: 1.0, fit time: 8.023533034697957
-g: 0.8421052631578947, lambda: 2.0, b: 0.1
-success count: 100, end times: 1.0, fit time: 6.617171795901668
-g: 0.8947368421052632, lambda: 2.0, b: 0.1
-success count: 100, end times: 1.0, fit time: 5.9572726957448925
-g: 0.9473684210526315, lambda: 2.0, b: 0.1
-success count: 100, end times: 1.0, fit time: 5.231411578421917
-g: 1.0, lambda: 2.0, b: 0.1
-success count: 100, end times: 1.0, fit time: 4.75905549810227
-number of successes: (13,)
+possible params: g: 0.4, lambda: 2.0, b: 0.0, time1: 178.23852527779403, time3: 187.3088327304038
+possible params: g: 0.4, lambda: 2.0, b: 0.21052631578947367, time1: 57.67570530379399, time3: 58.181191949617116
+possible params: g: 0.4, lambda: 2.0, b: 0.42105263157894735, time1: 23.67606540421794, time3: 23.087886189687723
+possible params: g: 0.4, lambda: 2.0, b: 0.631578947368421, time1: 13.089693394476853, time3: 10.958755696077
+possible params: g: 0.4, lambda: 2.0, b: 0.8421052631578947, time1: 12.244020886612121, time3: 5.854702609364079
+g: 0.4, lambda: 2.0, b: 0.0
+success count: 100, end times: 1.0, fit time: 394.96073635693864
+g: 0.4, lambda: 2.0, b: 0.21052631578947367
+success count: 100, end times: 1.0, fit time: 47.16067916458892
+g: 0.4, lambda: 2.0, b: 0.42105263157894735
+success count: 100, end times: 1.0, fit time: 15.893212715658098
+g: 0.4, lambda: 2.0, b: 0.631578947368421
+success count: 100, end times: 1.0, fit time: 8.024704682980236
+g: 0.4, lambda: 2.0, b: 0.8421052631578947
+success count: 100, end times: 1.0, fit time: 4.434237330186687
+number of successes: (5,)
+┌ Warning: dt(1.1368683772161603e-13) <= dtmin(1.1368683772161603e-13) at t=146.68705324862916, and step error estimate = 2.045550118059451. Aborting. There is either an error in your model specification or the true solution is unstable.
+└ @ SciMLBase ~/.julia/packages/SciMLBase/Dwomw/src/integrator_interface.jl:619
+┌ Warning: dt(2.842170943040401e-14) <= dtmin(2.842170943040401e-14) at t=27.939253263675585, and step error estimate = 2.671845273552425. Aborting. There is either an error in your model specification or the true solution is unstable.
+└ @ SciMLBase ~/.julia/packages/SciMLBase/Dwomw/src/integrator_interface.jl:619
+possible params: g: 0.4, lambda: 2.0, b: 0.0, time1: 178.23852527779403, time3: 187.3088327304038
+possible params: g: 0.4, lambda: 2.0, b: 0.21052631578947367, time1: 57.67570530379399, time3: 58.181191949617116
+possible params: g: 0.4, lambda: 2.0, b: 0.42105263157894735, time1: 23.67606540421794, time3: 23.087886189687723
+possible params: g: 0.4, lambda: 2.0, b: 0.631578947368421, time1: 13.089693394476853, time3: 10.958755696077
+possible params: g: 0.4, lambda: 2.0, b: 0.8421052631578947, time1: 12.244020886612121, time3: 5.854702609364079
+g: 0.4, lambda: 2.0, b: 0.0
+success count: 100, end times: 1.0, fit time: 389.4220115601904
+g: 0.4, lambda: 2.0, b: 0.21052631578947367
+success count: 100, end times: 1.0, fit time: 45.349478033202274
+g: 0.4, lambda: 2.0, b: 0.42105263157894735
+success count: 100, end times: 1.0, fit time: 18.728594603853008
+g: 0.4, lambda: 2.0, b: 0.631578947368421
+success count: 100, end times: 1.0, fit time: 7.982208815938245
+g: 0.4, lambda: 2.0, b: 0.8421052631578947
+success count: 100, end times: 1.0, fit time: 4.29967656373767
+number of successes: (5,)
+┌ Warning: dt(2.2737367544323206e-13) <= dtmin(2.2737367544323206e-13) at t=1004.122429820222, and step error estimate = 4.0980417523038515. Aborting. There is either an error in your model specification or the true solution is unstable.
+└ @ SciMLBase ~/.julia/packages/SciMLBase/Dwomw/src/integrator_interface.jl:619
+┌ Warning: dt(5.684341886080802e-14) <= dtmin(5.684341886080802e-14) at t=351.80748716723355, and step error estimate = 3.8593846055633416. Aborting. There is either an error in your model specification or the true solution is unstable.
+└ @ SciMLBase ~/.julia/packages/SciMLBase/Dwomw/src/integrator_interface.jl:619
+possible params: g: 0.2, lambda: 2.0, b: 1.0526315789473684, time1: 503.9084635984724, time3: 311.6301586811049
+possible params: g: 0.2, lambda: 2.0, b: 1.263157894736842, time1: 121.95608548825216, time3: 86.47204169340478
+possible params: g: 0.2, lambda: 2.0, b: 1.4736842105263157, time1: 39.91407166761432, time3: 31.3621594080302
+possible params: g: 0.2, lambda: 2.0, b: 1.6842105263157894, time1: 19.852692711950237, time3: 14.226067476550174
+possible params: g: 0.2, lambda: 2.0, b: 1.894736842105263, time1: 31.22651414416136, time3: 7.627626245772381
+g: 0.2, lambda: 2.0, b: 1.0526315789473684
+success count: 100, end times: 1.0, fit time: 329.8829095344111
+g: 0.2, lambda: 2.0, b: 1.263157894736842
+success count: 100, end times: 1.0, fit time: 77.70685626412217
+g: 0.2, lambda: 2.0, b: 1.4736842105263157
+success count: 100, end times: 1.0, fit time: 25.723335452488502
+g: 0.2, lambda: 2.0, b: 1.6842105263157894
+success count: 100, end times: 1.0, fit time: 10.708038396860125
+g: 0.2, lambda: 2.0, b: 1.894736842105263
+success count: 100, end times: 1.0, fit time: 6.085980805602403
+number of successes: (5,)

@@ -112,7 +112,7 @@ function find_b_vals(lambda_val, g_val)
 end
 
 cases = []
-lambda_val = 4
+lambda_val = 1.5
 g_val = 0.4
 for b_val in range(0, 6, 40)
     try
@@ -192,6 +192,6 @@ for case in cases
 end
 
 println("number of successes: ", size(success_cases))
-open("g4-1l4brange.json", "w") do file
+open("g4-1l15-1brange.json", "w") do file
     JSON.print(file, success_cases)
 end

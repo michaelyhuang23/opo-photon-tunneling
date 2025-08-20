@@ -5,7 +5,7 @@ using Ferrite, SparseArrays, LinearAlgebra, PolynomialRoots, Arpack, Plots, Stat
 b_val = 0.5
 lambda_val = 1.8
 g_val = 0.1
-div_val = 0
+div_val = 1
 
 function parametrize(alpha, beta)
     u = asin(g_val * alpha / sqrt(lambda_val)) + asin(g_val * beta / sqrt(lambda_val))
@@ -81,10 +81,10 @@ close!(dof_handler)
 # add dirichlet boundary condition
 constraint_handler = ConstraintHandler(dof_handler)
 # addvertexset!(grid, "LL", x -> x[1] ≈ -2.0 && x[2] ≈ -1.0)
-l_boundary_condition = Dirichlet(:beta, getfaceset(grid, "left"), (x, t) -> beta_A)
-r_boundary_condition = Dirichlet(:beta, getfaceset(grid, "right"), (x, t) -> beta_B)
-add!(constraint_handler, l_boundary_condition)
-add!(constraint_handler, r_boundary_condition)
+#l_boundary_condition = Dirichlet(:beta, getfaceset(grid, "left"), (x, t) -> beta_A)
+#r_boundary_condition = Dirichlet(:beta, getfaceset(grid, "right"), (x, t) -> beta_B)
+#add!(constraint_handler, l_boundary_condition)
+#add!(constraint_handler, r_boundary_condition)
 close!(constraint_handler)
 
 
@@ -104,13 +104,13 @@ function assemble_element!(Ke::Matrix, Fe::Vector, cellvalues::CellScalarValues,
             g_phi = shape_value(cellvalues, q_point, i)
             g_phi_grad = shape_gradient(cellvalues, q_point, i)
             # Add contribution to Fe
-            Fe[i] += g_phi * div_J(point_coord[1], point_coord[2]) * exp(V(point_coord[1], point_coord[2]) / g_val^2) / g_val^2 * dOmega
+            Fe[i] += g_phi * div_J(point_coord[1], point_coord[2]) * exp(V(point_coord[1], point_coord[2]) / g_val^2) * dOmega
             # Loop over trial basis
             for j in 1:n_basefuncs
                 beta_phi_grad = shape_gradient(cellvalues, q_point, j)
                 # Add contribution to Ke
-                Ke[i, j] += g_phi * dot(beta_phi_grad, V_grad(point_coord[1], point_coord[2])) / g_val^2 * dOmega
-                Ke[i, j] += dot(g_phi_grad, beta_phi_grad) * dOmega
+                Ke[i, j] += g_phi * dot(beta_phi_grad, V_grad(point_coord[1], point_coord[2])) * dOmega
+                Ke[i, j] += g_val^2 * dot(g_phi_grad, beta_phi_grad) * dOmega
             end
         end
     end
@@ -130,7 +130,7 @@ function assemble_element!(Ke::Matrix, Fe::Vector, cellvalues::CellScalarValues,
                     # Loop over trial basis
                     for j in 1:n_basefuncs
                         beta_phi_grad = shape_gradient(facevalues, q_point, j)
-                        Ke[i, j] -= g_phi * dot(beta_phi_grad, n) * dGamma
+                        # Ke[i, j] -= g_phi * dot(beta_phi_grad, n) * dGamma
                         # comment out to impose von neummann condition
                     end
                 end

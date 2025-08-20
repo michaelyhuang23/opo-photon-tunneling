@@ -86,6 +86,37 @@ function sol3_time(b_val, lambda_val, g_val)
     return analytic_time(lambda_val, b_val, g_val)
 end
 
+function sol4_time(b_val, lambda_val, g_val)
+    function parametrize(alpha, beta)
+        u = asin(g_val * alpha / sqrt(lambda_val)) + asin(g_val * beta / sqrt(lambda_val))
+        v = asin(g_val * alpha / sqrt(lambda_val)) - asin(g_val * beta / sqrt(lambda_val))
+        return [u, v]
+    end
+    # Define the sigma function
+    sigma = b_val * g_val / sqrt(lambda_val) 
+    # Define the V function
+    V(x) = lambda_val * cos(x) - lambda_val + 2 * (sigma - 1) * log(1 + cos(x)) - 
+                    2 * sigma * log(3 - cos(x) + 4 * sin(x / 2))
+    alpha_roots = roots([-b_val, -(lambda_val - 1), 0, g_val^2])
+    alpha_roots = sort(map(x -> real(x), alpha_roots))
+    u_roots = map(x -> parametrize(x, x)[1], alpha_roots)
+    ua, us, ub = u_roots
+
+    Vuu(u) = 1 - lambda_val * cos(u) - sin(u/2)*(2*g_val*b_val/sqrt(lambda_val)-2*sin(u/2))/(2*cos(u/2)^2)
+    Vuuu(u) = lambda_val * sin(u) - 1/cos(u/2)^3 * (g_val * b_val / (2*sqrt(lambda_val)) * (1+sin(u/2)^2) - sin(u/2))
+    Vvv(u) = lambda_val - (2*g_val*b_val/sqrt(lambda_val) - 2)/(2*cos(u/2)^2) + g_val * b_val / (sqrt(lambda_val) * (1+sin(u/2)))
+
+    au1 = sqrt((pi * g_val^2) / (2 * Vuu(ua)))
+    su1 = sqrt(-(pi * g_val^2) / (2 * Vuu(us)))
+    sv1 = sqrt((pi * g_val^2) / (2 * Vvv(us)))
+    av1 = sqrt((pi * g_val^2) / (2 * Vvv(ua)))
+    au2 = g_val^2 * Vuuu(ua) / (3 * Vuu(ua)^2)
+    su2 = g_val^2 * Vuuu(us) / (3 * Vuu(us)^2)
+
+    rate = exp((V(ua) - V(us))/g_val^2) * 2 * g_val^2 * sv1 / av1 / (7*au1*su1 + au2*su1 + au1*su2 - au2*su2)
+    return 1/rate
+end
+
 function find_b_vals(lambda_val, g_val)
     left = BigFloat(0.0)
     right = BigFloat(4.0 * 10^10)
@@ -112,20 +143,43 @@ function find_b_vals(lambda_val, g_val)
 end
 
 cases = []
-lambda_val = 1.5
-g_val = 0.4
-for b_val in range(0, 4, 40)
-    try
-        time1 = sol1_time(b_val, lambda_val, g_val)
-        time3 = sol3_time(b_val, lambda_val, g_val)
-        if time1 < 400 || time3 < 400
-            push!(cases, Dict("g" => g_val, "lambda" => lambda_val, "b" => b_val, "sol1_time" => time1, "sol3_time" => time3))
-            println("possible params: g: $g_val, lambda: $lambda_val, b: $b_val, time1: $time1, time3: $time3")
+lambda_val = 2
+for g_val in [0.1,0.15,0.2,0.25,0.3,0.4]
+    for b_val in range(0, 4, 40)
+        try
+            time1 = sol1_time(b_val, lambda_val, g_val)
+            println("time1: $time1")
+            time3 = sol3_time(b_val, lambda_val, g_val)
+            println("time3: $time3")
+            time4 = sol4_time(b_val, lambda_val, g_val)
+            println("time4: $time4")
+            if time1 < 400 || time3 < 400 || time4 < 400
+                push!(cases, Dict("g" => g_val, "lambda" => lambda_val, "b" => b_val, "sol1_time" => time1, "sol3_time" => time3, "sol4_time" => time4))
+                println("possible params: g: $g_val, lambda: $lambda_val, b: $b_val, time1: $time1, time3: $time3, time4: $time4")
+            end
+        catch e
         end
-    catch e
     end
 end
 
+g_val = 0.4
+for lambda_val in [1.25,1.5,1.75,2,2.25,2.5]
+    for b_val in range(0, 4, 40)
+        try
+            time1 = sol1_time(b_val, lambda_val, g_val)
+            println("time1: $time1")
+            time3 = sol3_time(b_val, lambda_val, g_val)
+            println("time3: $time3")
+            time4 = sol4_time(b_val, lambda_val, g_val)
+            println("time4: $time4")
+            if time1 < 400 || time3 < 400 || time4 < 400
+                push!(cases, Dict("g" => g_val, "lambda" => lambda_val, "b" => b_val, "sol1_time" => time1, "sol3_time" => time3, "sol4_time" => time4))
+                println("possible params: g: $g_val, lambda: $lambda_val, b: $b_val, time1: $time1, time3: $time3, time4: $time4")
+            end
+        catch e
+        end
+    end
+end
 
 function sim_time(b_val, lambda_val, g_val, t_sim_end)
     function drift!(dalpha, alpha, p, t)
@@ -192,6 +246,6 @@ for case in cases
 end
 
 println("number of successes: ", size(success_cases))
-open("g4-1l15-2brange.json", "w") do file
+open("all_outputs.json", "w") do file
     JSON.print(file, success_cases)
 end

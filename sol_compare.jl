@@ -222,9 +222,9 @@ function sim_time(b_val, lambda_val, g_val, t_sim_end)
     end
     mean_amps ./= length(successful_trajs)
     mean_ts ./= length(successful_trajs)
-    decay_model(x, p) = p[1] .* exp.(-p[2] .* x)
-    fit = curve_fit(decay_model, mean_ts, mean_amps, [1.0, 1.0])
-    fit_time = 2 / coef(fit)[2]
+    decay_model(x, p) = p[1] .* exp.(-p[2] .* x) .+ p[3]
+    fit = curve_fit(decay_model, mean_ts, mean_amps, [1.0, 1.0, 10.0])
+    fit_time = 1 / coef(fit)[2]
     end_time = 1.0#sum(end_times) / length(end_times)
     println("g: $g_val, lambda: $lambda_val, b: $b_val")
     println("success count: $(length(successful_trajs)), end times: $end_time, fit time: $fit_time")
